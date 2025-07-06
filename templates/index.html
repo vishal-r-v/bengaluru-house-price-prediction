@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Bengaluru House Price Predictor</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Inter', sans-serif;
+            background: linear-gradient(to right top, #6a11cb, #2575fc);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .glass-container {
+            background: rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(15px);
+            -webkit-backdrop-filter: blur(15px);
+            border-radius: 20px;
+            padding: 40px 30px;
+            max-width: 600px;
+            width: 90%;
+            box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+            color: #fff;
+        }
+
+        h2 {
+            text-align: center;
+            margin-bottom: 30px;
+            font-size: 28px;
+            color: #ffffff;
+        }
+
+        label {
+            display: block;
+            margin-top: 18px;
+            font-weight: 600;
+            color: #eeeeee;
+        }
+
+        input, select {
+            width: 100%;
+            padding: 12px;
+            margin-top: 6px;
+            border: none;
+            border-radius: 10px;
+            background: rgba(255, 255, 255, 0.2);
+            color: #fff;
+            font-size: 15px;
+            outline: none;
+            transition: 0.3s ease;
+            appearance: none;
+            -webkit-appearance: none;
+            -moz-appearance: none;
+            background-image: url('data:image/svg+xml;utf8,<svg fill="white" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg"><path d="M7 10l5 5 5-5z"/></svg>');
+            background-repeat: no-repeat;
+            background-position-x: 95%;
+            background-position-y: center;
+        }
+
+        input:focus, select:focus {
+            background: rgba(255, 255, 255, 0.3);
+        }
+
+        select option {
+            background-color: #333;
+            color: #fff;
+        }
+
+        button {
+            width: 100%;
+            background: #ffffff;
+            color: #2575fc;
+            padding: 14px;
+            font-size: 16px;
+            font-weight: 600;
+            border: none;
+            border-radius: 12px;
+            margin-top: 30px;
+            cursor: pointer;
+            transition: background 0.3s ease;
+        }
+
+        button:hover {
+            background: #e1e9f7;
+        }
+
+        .result {
+            margin-top: 30px;
+            text-align: center;
+            font-size: 20px;
+            font-weight: 600;
+            color: #ffffff;
+        }
+
+        .result span {
+            color: #ffe600;
+        }
+    </style>
+</head>
+<body>
+
+<div class="glass-container">
+    <h2>🏡 Bengaluru House Price Predictor</h2>
+
+    <form method="POST" action="/predict">
+        <label>Area Type</label>
+        <select name="area_type" required>
+            <option value="Super built-up  Area">Super built-up Area</option>
+            <option value="Plot  Area">Plot Area</option>
+            <option value="Built-up  Area">Built-up Area</option>
+            <option value="Carpet  Area">Carpet Area</option>
+        </select>
+
+        <label>Location</label>
+        <input type="text" name="location" placeholder="e.g., Whitefield" required>
+
+        <label>Size (e.g., 2 BHK)</label>
+        <input type="text" name="size" placeholder="e.g., 2 BHK" required>
+
+        <label>Total Sqft</label>
+        <input type="number" name="total_sqft" required>
+
+        <label>Bath</label>
+        <input type="number" name="bath" min="1" required>
+
+        <label>Balcony</label>
+        <input type="number" name="balcony" min="0" required>
+
+        <button type="submit">🎯 Predict Price</button>
+    </form>
+
+    {% if prediction %}
+        <div class="result">
+            ✅ Predicted Price: <span>₹{{ prediction }} Lakhs</span>
+        </div>
+    {% endif %}
+</div>
+
+</body>
+</html>

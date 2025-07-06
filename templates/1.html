@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Bengaluru House Price Predictor</title>
+    <style>
+        body {
+            font-family: Arial;
+            max-width: 500px;
+            margin: auto;
+            padding: 40px;
+        }
+        input, select {
+            width: 100%;
+            padding: 8px;
+            margin-top: 12px;
+        }
+        button {
+            margin-top: 20px;
+            width: 100%;
+            padding: 12px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            font-size: 16px;
+        }
+        .result {
+            margin-top: 20px;
+            font-size: 18px;
+            color: #333;
+        }
+    </style>
+</head>
+<body>
+
+<h2>Predict Bengaluru House Price</h2>
+
+<form method="POST" action="/predict">
+    <label>Area Type</label>
+    <select name="area_type">
+        <option value="Super built-up  Area">Super built-up Area</option>
+        <option value="Plot  Area">Plot Area</option>
+        <option value="Built-up  Area">Built-up Area</option>
+        <option value="Carpet  Area">Carpet Area</option>
+    </select>
+
+    <label>Location</label>
+    <input type="text" name="location" placeholder="e.g., Whitefield" required>
+
+    <label>Size (e.g., 2 BHK)</label>
+    <input type="text" name="size" placeholder="e.g., 2 BHK" required>
+
+    <label>Total Sqft</label>
+    <input type="number" name="total_sqft" required>
+
+    <label>Bath</label>
+    <input type="number" name="bath" min="1" required>
+
+    <label>Balcony</label>
+    <input type="number" name="balcony" min="0" required>
+
+    <button type="submit">Predict Price</button>
+</form>
+
+{% if prediction %}
+    <div class="result">
+        <strong>Predicted Price:</strong> ₹{{ prediction }} Lakhs
+    </div>
+{% endif %}
+
+</body>
+</html>
